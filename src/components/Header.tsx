@@ -38,24 +38,42 @@ export default function Header() {
   };
 
   return (
-    <header className="px-20 py-6 flex flex-row items-center justify-between border-b border-[#010101]">
-      <Image src="/logo-mosten.svg" alt="Logo" width={180} height={180} />
+    <>
+      <header className="relative border-b border-slate-700/50 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 md:h-20">
+            <div className="flex-shrink-0">
+              <Image
+                src="/logo-mosten.svg"
+                alt="Mosten Studio"
+                width={180}
+                height={180}
+                className="h-8 w-auto sm:h-10 md:h-12 lg:h-14 transition-all duration-200"
+                priority
+              />
+            </div>
 
-      <button
-        className="bg-[#ff4f0f] text-white px-4 py-2 rounded-md cursor-pointer transition-transform duration-200 hover:scale-105 flex flex-row items-center gap-2"
-        onClick={() => setIsModalOpen(true)}
-      >
-        <Plus height={16} width={16} />
-        Adicionar Filme / Série
-      </button>
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="inline-flex items-center justify-center gap-2 px-4 py-2 md:px-6 md:py-2.5 
+               bg-orange-500 hover:bg-orange-600
+               text-white font-medium text-sm md:text-base rounded-lg
+               transition-colors duration-200"
+            >
+              <Plus className="h-4 w-4 md:h-5 md:w-5" />
+              <span className="hidden sm:inline-block">Adicionar Conteúdo</span>
+              <span className="sm:hidden">Adicionar</span>
+            </button>
+          </div>
+        </div>
+      </header>
 
-      {isModalOpen && (
-        <ModalCadastro
-          isOpen={true}
-          onClose={() => setIsModalOpen(false)}
-          onSubmit={handleCadastro}
-        />
-      )}
-    </header>
+      {/* Modal moved outside header */}
+      <ModalCadastro
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleCadastro}
+      />
+    </>
   );
 }
